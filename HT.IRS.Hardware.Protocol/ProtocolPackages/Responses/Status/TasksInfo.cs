@@ -1,6 +1,6 @@
 ﻿namespace HT.IRS.Hardware.Protocol.ProtocolPackages.Responses.Status
 {
-    public class Task:StatusResponsePackageBase
+    public class Task: ResponsePackageBase
     {
         public Task(string data):base(data)
         {

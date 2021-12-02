@@ -1,6 +1,6 @@
 ﻿namespace HT.IRS.Hardware.Protocol.ProtocolPackages.Responses.Status
 {
-    public class IoInfo:StatusResponsePackageBase
+    public class IoInfo: ResponsePackageBase
     {
         public IoInfo(string data):base(data)
         {

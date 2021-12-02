@@ -1,6 +1,6 @@
 ﻿namespace HT.IRS.Hardware.Protocol.ProtocolPackages.Responses.Status
 {
-    public class RunInfo:StatusResponsePackageBase
+    public class RunInfo: ResponsePackageBase
     {
         public RunInfo(string data):base(data)
         {

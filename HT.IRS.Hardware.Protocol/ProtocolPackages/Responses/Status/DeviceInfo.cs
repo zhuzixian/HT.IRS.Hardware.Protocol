@@ -1,6 +1,6 @@
 ﻿namespace HT.IRS.Hardware.Protocol.ProtocolPackages.Responses.Status
 {
-    public class DeviceInfo:StatusResponsePackageBase
+    public class DeviceInfo: ResponsePackageBase
     {
         public DeviceInfo(string data):base(data)
         {

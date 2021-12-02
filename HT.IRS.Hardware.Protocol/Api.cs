@@ -38,7 +38,8 @@
         public const ushort ConfigDownload = 4004;
         public const ushort ConfigRemove = 4005;
         public const ushort ConfigSetParams = 4006;
-        public const ushort ConfigDefaultWorkflow = 4007;
+        public const ushort ConfigReloadParams = 4007;
+        public const ushort ConfigDefaultWorkflow = 4008;
         #endregion
 
     }

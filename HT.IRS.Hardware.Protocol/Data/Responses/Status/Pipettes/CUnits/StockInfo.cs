@@ -2,10 +2,10 @@
 {
     public class StockInfo: Responses.Status.StockInfo
     {
-        public bool IsSampleTrayExist { get; set; }
-        public bool IsTipsBoxExist { get; set; }
-        public bool IsDiscardTipsBoxExist { get; set; }
-        public bool IsWellPlateExist { get; set; }
+        public int SampleTray { get; set; }
+        public int TipsBox { get; set; }
+        public int DiscardTipsBox { get; set; }
+        public int WellPlate { get; set; }
         public int UsedTipSeatsCount { get; set; }
         public int UsedTipsCount { get; set; }
     }

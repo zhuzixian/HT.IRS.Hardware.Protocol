@@ -2,8 +2,9 @@
 {
     public class ResponsePackageBase:ProtocolPackage
     {
-        public ResponsePackageBase()
+        public ResponsePackageBase(string data)
         {
+            Data = data;
             IsRequestMessage = false;
         }
     }
