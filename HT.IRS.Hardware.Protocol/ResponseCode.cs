@@ -2,6 +2,8 @@
 {
     public class ResponseCode
     {
+        public const int Success = 0;
+
         public const int Unavailable = 41001;
         public const int ParamMissing = 41002;
         public const int ParamTypeError = 41003;
@@ -27,5 +29,9 @@
         public const int SetParamNotExists = 43006;
         public const int ReloadParamError = 43007;
         public const int InternalError = 43008;
+
+        public const int TaskNotFound = 44001;
+        public const int TaskCanceled = 44002;
+        public const int TaskFaulted = 44003;
     }
 }

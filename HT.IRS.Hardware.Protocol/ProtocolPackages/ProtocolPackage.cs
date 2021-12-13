@@ -1,57 +1,80 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace HT.IRS.Hardware.Protocol.ProtocolPackages
 {
     public class ProtocolPackage
     {
+        public override string ToString()
+        {
+            var stringBuild = new StringBuilder();
+            stringBuild.AppendLine($"ProtocolVersion: {ProtocolVersion}");
+            stringBuild.AppendLine($"IsRequestMessage: { IsRequestMessage }");
+            stringBuild.AppendLine($"SequenceNo: { SequenceNo }");
+            stringBuild.AppendLine($"Timestamp: {Timestamp:yyyy-MM-dd HH:mm:ss.fff}");
+            stringBuild.AppendLine($"Api: {Api}");
+            stringBuild.AppendLine($"Data: {Environment.NewLine}{Data}");
+            return stringBuild.ToString();
+        }
+
         /// <summary>
         /// 协议版本
         /// </summary>
-        public byte ProtocolVersion { get; set; }
+        public byte ProtocolVersion { get; protected set; }
 
         /// <summary>
         /// 上行？
         /// </summary>
-        public bool IsRequestMessage { get; set; }
+        public bool IsRequestMessage { get; protected set; }
 
         /// <summary>
         /// 流水码
         /// </summary>
-        public ushort SequenceNo { get; set; }
+        public ushort SequenceNo { get; protected set; }
 
         /// <summary>
         /// 时间戳
         /// </summary>
-        public DateTime Timestamp { get; set; }
+        public DateTime Timestamp { get; protected set; }
 
         /// <summary>
         /// 请求类型
         /// </summary>
-        public ushort Api { get; set; }
+        public ushort Api { get; protected set; }
 
 
         /// <summary>
         /// 正文
         /// </summary>
-        public string Data { get; set; }
+        public string Data { get; protected set; }
+
+        static ProtocolPackage()
+        {
+            Locker = new object();
+        }
 
         public ProtocolPackage()
         {
+            SequenceNo = GetNextSequenceNo();
+            Timestamp = DateTime.Now;
         }
 
-        public ProtocolPackage(byte protocolVersion,
+        public ProtocolPackage(
             bool isRequestMessage,
-            ushort sequenceNo,
             ushort api,
-            string data)
+            string data,
+            ushort sequenceNo = ushort.MinValue,
+            byte protocolVersion = 0x01,
+            DateTime? timestamp =  null)
         {
             ProtocolVersion = protocolVersion;
             IsRequestMessage = isRequestMessage;
-            SequenceNo = sequenceNo;
+            SequenceNo = sequenceNo == ushort.MinValue ? GetNextSequenceNo() : sequenceNo;
             Api = api;
             Data = data;
+            Timestamp = timestamp ?? DateTime.Now;
         }
 
         /// <summary>
@@ -94,18 +117,30 @@ namespace HT.IRS.Hardware.Protocol.ProtocolPackages
             // 时间戳
             var utcTimestamp = (ulong)(timestamp.ToUniversalTime() - new DateTime(1970, 1, 1, 0, 0, 0, 0))
                 .TotalMilliseconds;
-            var timestampBytes = BitConverter.GetBytes(utcTimestamp).Reverse();
+            var timestampBytes = BitConverter.GetBytes(utcTimestamp);
+            if (BitConverter.IsLittleEndian)
+            {
+                Array.Reverse(timestampBytes);
+            }
             results.AddRange(timestampBytes);
 
             // 序列号
-            var sequenceNoBytes = BitConverter.GetBytes(sequenceNo).Reverse();
+            var sequenceNoBytes = BitConverter.GetBytes(sequenceNo);
+            if (BitConverter.IsLittleEndian)
+            {
+                Array.Reverse(sequenceNoBytes);
+            }
             results.AddRange(sequenceNoBytes);
 
             // 保留字节
             results.AddRange(new byte[8]);
 
             // 请求类型
-            var apiTypeBytes = BitConverter.GetBytes(api).Reverse().ToArray();
+            var apiTypeBytes = BitConverter.GetBytes(api);
+            if (BitConverter.IsLittleEndian)
+            {
+                Array.Reverse(apiTypeBytes);
+            }
             results.AddRange(apiTypeBytes);
 
             var dataBytes = string.IsNullOrEmpty(data)
@@ -114,8 +149,12 @@ namespace HT.IRS.Hardware.Protocol.ProtocolPackages
 
             // 正文长度
             var dataLenBytes = dataBytes == null
-                ? BitConverter.GetBytes((uint)0).Reverse()
-                : BitConverter.GetBytes((uint)dataBytes.Length).Reverse();
+                ? BitConverter.GetBytes((uint)0)
+                : BitConverter.GetBytes((uint)dataBytes.Length);
+            if (BitConverter.IsLittleEndian)
+            {
+                Array.Reverse(dataLenBytes);
+            }
             results.AddRange(dataLenBytes);
 
             // 正文类型
@@ -139,14 +178,14 @@ namespace HT.IRS.Hardware.Protocol.ProtocolPackages
         /// <summary>
         /// 解析
         /// </summary>
-        /// <param name="data">数据</param>
+        /// <param name="binary">数据</param>
         /// <param name="startIndex">起始位置</param>
         /// <param name="length">长度</param>
-        /// <param name="message">结果</param>
+        /// <param name="package"></param>
         /// <returns></returns>
-        public static bool TryParse(byte[] data, int startIndex, int length, out ProtocolPackage package)
+        public static bool TryParse(byte[] binary, int startIndex, int length, out ProtocolPackage package)
         {
-            package = new ProtocolPackage();
+            package = default;
             var protocolVersionIndex = sizeof(byte);
             var isRequestMessageIndex = protocolVersionIndex + sizeof(byte);
             var timestampIndex = isRequestMessageIndex + sizeof(byte);
@@ -157,17 +196,17 @@ namespace HT.IRS.Hardware.Protocol.ProtocolPackages
             var dataStartIndex = dataTypeIndex + sizeof(byte);
 
             var minLength = dataStartIndex + sizeof(byte) * 2 + sizeof(byte);
-            if (data == null || data.Length < minLength)
+            if (binary == null || binary.Length < minLength)
             {
                 return false;
             }
 
-            if (data.First() != Header || data.Last() != End)
+            if (binary.First() != Header || binary.Last() != End)
             {
                 return false;
             }
 
-            var bytes = data.Skip(startIndex).Take(length).ToArray();
+            var bytes = binary.Skip(startIndex).Take(length).ToArray();
             var sourceCrc = bytes.Skip(bytes.Length - 3).Take(2).ToArray();
             var crc = CrcCalculator.CalculateCrc(bytes.Skip(1).Take(bytes.Length - 4).ToArray());
             for (var i = 0; i < sourceCrc.Length; i++)
@@ -178,37 +217,62 @@ namespace HT.IRS.Hardware.Protocol.ProtocolPackages
                 }
             }
 
-            var dataLengthBytes = bytes.Skip(dataLengthIndex).Take(sizeof(uint)).Reverse().ToArray();
+            var dataLengthBytes = bytes.Skip(dataLengthIndex).Take(sizeof(uint)).ToArray();
+            if (BitConverter.IsLittleEndian)
+            {
+                Array.Reverse(dataLengthBytes);
+            }
             var dataLength = (int)BitConverter.ToUInt32(dataLengthBytes, 0);
             if (bytes.Length != dataStartIndex + dataLength + sizeof(byte) * 2 + sizeof(byte))
             {
                 return false;
             }
 
-            package.ProtocolVersion = bytes[protocolVersionIndex];
-            package.IsRequestMessage = bytes[isRequestMessageIndex] == 0x00;
+            var protocolVersion = bytes[protocolVersionIndex];
+            var isRequestMessage = bytes[isRequestMessageIndex] == 0x00;
             
-            var timestampBytes = data.Skip(timestampIndex).Take(sizeof(ulong))
-                .Reverse().ToArray();
+            var timestampBytes = binary.Skip(timestampIndex).Take(sizeof(ulong)).ToArray();
+            if (BitConverter.IsLittleEndian)
+            {
+                Array.Reverse(timestampBytes);
+            }
             var timestamp = (long)BitConverter.ToUInt64(timestampBytes, 0);
             var baseDateTime = new DateTime(1970, 1, 1);
             package.Timestamp = baseDateTime.AddMilliseconds(timestamp).ToLocalTime();
 
-            var sequenceNoBytes = bytes.Skip(sequenceNoIndex).Take(sizeof(ushort))
-                .Reverse().ToArray();
-            package.SequenceNo = BitConverter.ToUInt16(sequenceNoBytes, 0);
+            var sequenceNoBytes = bytes.Skip(sequenceNoIndex).Take(sizeof(ushort)).ToArray();
+            if (BitConverter.IsLittleEndian)
+            {
+                Array.Reverse(sequenceNoBytes);
+            }
+            var sequenceNo = BitConverter.ToUInt16(sequenceNoBytes, 0);
 
-            var apiBytes = bytes.Skip(apiIndex).Take(sizeof(ushort))
-                .Reverse().ToArray();
-            package.Api = BitConverter.ToUInt16(apiBytes, 0);
+            var apiBytes = bytes.Skip(apiIndex).Take(sizeof(ushort)).ToArray();
+            if (BitConverter.IsLittleEndian)
+            {
+                Array.Reverse(apiBytes);
+            }
+            var api = BitConverter.ToUInt16(apiBytes, 0);
         
             var dataBytes = bytes.Skip(dataStartIndex).Take(dataLength).ToArray();
-            package.Data = System.Text.Encoding.UTF8.GetString(dataBytes);
+            var data = System.Text.Encoding.UTF8.GetString(dataBytes);
 
+            package = new ProtocolPackage(isRequestMessage, api, data, sequenceNo, protocolVersion);
             return true;
         }
 
         public static byte Header => 0XCE;
         public static byte End => 0xFE;
+
+        private static ushort _nextSequence = ushort.MinValue + 1;
+        private static readonly object Locker;
+
+        public static ushort GetNextSequenceNo()
+        {
+            lock(Locker)
+            {
+                return _nextSequence++;
+            }
+        }
     }
 }
