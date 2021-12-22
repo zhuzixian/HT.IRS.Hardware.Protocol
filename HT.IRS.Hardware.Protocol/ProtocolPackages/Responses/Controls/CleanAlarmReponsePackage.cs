@@ -1,11 +1,17 @@
-﻿namespace HT.IRS.Hardware.Protocol.ProtocolPackages.Responses.Controls
+﻿using HT.IRS.Hardware.Protocol.Data.Responses.Controls;
+
+namespace HT.IRS.Hardware.Protocol.ProtocolPackages.Responses.Controls
 {
-    public class CleanAlarmResponsePackage:ResponsePackageBase
+    public class CleanAlarmResponsePackage:ResponsePackageBase<CleanAlarmResponseData>
     {
-        public CleanAlarmResponsePackage(string data):base(data)
+        public CleanAlarmResponsePackage(ushort sequenceNo, string data)
+            :base(sequenceNo, APIs.Controls.CleanAlarm, data)
         {
-            Data = data;
-            Api = APIs.Controls.CleanAlarm;
+        }
+
+        public CleanAlarmResponsePackage(ushort sequenceNo, CleanAlarmResponseData data) 
+            : base(sequenceNo, APIs.Controls.CleanAlarm, data)
+        {
         }
     }
 }

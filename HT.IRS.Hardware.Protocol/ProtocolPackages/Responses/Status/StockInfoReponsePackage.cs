@@ -1,10 +1,18 @@
-﻿namespace HT.IRS.Hardware.Protocol.ProtocolPackages.Responses.Status
+﻿using HT.IRS.Hardware.Protocol.Data.Responses;
+
+namespace HT.IRS.Hardware.Protocol.ProtocolPackages.Responses.Status
 {
-    public class StockInfoResponsePackage: ResponsePackageBase
+    public class StockInfoResponsePackage<T>: ResponsePackageBase<T>
+        where T : ResponseDataBase
     {
-        public StockInfoResponsePackage(string data):base(data)
+        public StockInfoResponsePackage(ushort sequenceNo, string data)
+            :base(APIs.Status.GetStockInfos, sequenceNo, data)
         {
-            Api = APIs.Status.GetStockInfos;
+        }
+
+        public StockInfoResponsePackage(ushort sequenceNo, T data) 
+            : base(APIs.Status.GetStockInfos, sequenceNo, data)
+        {
         }
     }
 }

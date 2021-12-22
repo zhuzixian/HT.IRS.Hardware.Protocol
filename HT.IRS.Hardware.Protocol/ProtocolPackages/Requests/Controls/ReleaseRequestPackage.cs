@@ -2,9 +2,8 @@
 {
     public class ReleaseRequestPackage:RequestPackageBase
     {
-        public ReleaseRequestPackage()
+        public ReleaseRequestPackage():base(APIs.Controls.Release)
         {
-            Api = APIs.Controls.Release;
         }
     }
 }

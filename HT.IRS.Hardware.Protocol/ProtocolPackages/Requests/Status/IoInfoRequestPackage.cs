@@ -2,9 +2,8 @@
 {
     public class IoInfoRequestPackage:RequestPackageBase
     {
-        public IoInfoRequestPackage()
+        public IoInfoRequestPackage():base(APIs.Status.GetIoInfos)
         {
-            Api = APIs.Status.GetIoInfos;
         }
     }
 }

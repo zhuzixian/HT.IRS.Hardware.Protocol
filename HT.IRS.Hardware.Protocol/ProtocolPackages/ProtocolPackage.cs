@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 
 namespace HT.IRS.Hardware.Protocol.ProtocolPackages
 {
@@ -274,5 +275,16 @@ namespace HT.IRS.Hardware.Protocol.ProtocolPackages
                 return _nextSequence++;
             }
         }
+
+        protected string Serialize<T>(T obj)
+        {
+            return JsonSerializer.Serialize(obj, SerializerOptions);
+        }
+
+        public static JsonSerializerOptions SerializerOptions => new JsonSerializerOptions
+        {
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+            WriteIndented = true
+        };
     }
 }

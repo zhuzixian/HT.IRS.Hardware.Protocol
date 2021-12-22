@@ -1,10 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace HT.IRS.Hardware.Protocol.Data.Responses.Status
 {
     public class TaskInfoResponseData:ResponseDataBase
     {
-        public TaskStatus[] Tasks { get; set; }
+        public TaskInfoResponseData()
+        {
+            Tasks = new List<TaskStatus>();
+        }
+
+        public IList<TaskStatus> Tasks { get; set; }
     }
 
     public class TaskStatus

@@ -2,9 +2,8 @@
 {
     public class TasksInfoRequestPackage:RequestPackageBase
     {
-        public TasksInfoRequestPackage()
+        public TasksInfoRequestPackage():base(APIs.Status.GetTaskInfos)
         {
-            Api = APIs.Status.GetTaskInfos;
         }
     }
 }

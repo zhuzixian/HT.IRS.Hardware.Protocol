@@ -1,10 +1,17 @@
-﻿namespace HT.IRS.Hardware.Protocol.ProtocolPackages.Responses.Status
+﻿using HT.IRS.Hardware.Protocol.Data.Responses.Status;
+
+namespace HT.IRS.Hardware.Protocol.ProtocolPackages.Responses.Status
 {
-    public class RunInfoResponsePackage: ResponsePackageBase
+    public class RunInfoResponsePackage: ResponsePackageBase<RunInfoResponseData>
     {
-        public RunInfoResponsePackage(string data):base(data)
+        public RunInfoResponsePackage(ushort sequenceNo, string data)
+            :base(APIs.Status.GetRunInfos, sequenceNo, data)
         {
-            Api = APIs.Status.GetRunInfos;
+        }
+
+        public RunInfoResponsePackage(ushort sequenceNo, RunInfoResponseData data) 
+            : base(APIs.Status.GetRunInfos, sequenceNo, data)
+        {
         }
     }
 }

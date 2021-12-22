@@ -1,10 +1,16 @@
-﻿namespace HT.IRS.Hardware.Protocol.ProtocolPackages.Requests.Tasks
+﻿using HT.IRS.Hardware.Protocol.Data.Requests.Tasks;
+
+namespace HT.IRS.Hardware.Protocol.ProtocolPackages.Requests.Tasks
 {
     public class CancelRequestPackage:TaskRequestPackageBase
     {
-        public CancelRequestPackage(string data) : base(data)
+        public CancelRequestPackage(string data) : base(APIs.Tasks.Cancel, data)
         {
-            Api = APIs.Tasks.Cancel;
+        }
+
+        public CancelRequestPackage(CancelRequestData data) : base(APIs.Tasks.Cancel)
+        {
+            Data = Serialize(data);
         }
     }
 }

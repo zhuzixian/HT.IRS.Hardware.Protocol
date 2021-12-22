@@ -2,9 +2,8 @@
 {
     public class ParamInfoRequestPackage:RequestPackageBase
     {
-        public ParamInfoRequestPackage()
+        public ParamInfoRequestPackage():base(APIs.Status.GetParamInfos)
         {
-            Api = APIs.Status.GetParamInfos;
         }
     }
 }

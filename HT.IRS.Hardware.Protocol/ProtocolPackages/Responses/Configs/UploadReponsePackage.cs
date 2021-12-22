@@ -1,10 +1,17 @@
-﻿namespace HT.IRS.Hardware.Protocol.ProtocolPackages.Responses.Configs
+﻿using HT.IRS.Hardware.Protocol.Data.Responses.Configs;
+
+namespace HT.IRS.Hardware.Protocol.ProtocolPackages.Responses.Configs
 {
-    public class UploadResponsePackage : ResponsePackageBase
+    public class UploadResponsePackage : ResponsePackageBase<UploadResponseData>
     {
-        public UploadResponsePackage(string data) : base(data)
+        public UploadResponsePackage(ushort sequenceNo, string data) 
+            : base(sequenceNo, APIs.Configs.Upload, data) 
         {
-            Api = APIs.Configs.Upload;
+        }
+
+        public UploadResponsePackage(ushort sequenceNo, UploadResponseData data) 
+            : base(sequenceNo, APIs.Configs.Upload, data) 
+        {
         }
     }
 }

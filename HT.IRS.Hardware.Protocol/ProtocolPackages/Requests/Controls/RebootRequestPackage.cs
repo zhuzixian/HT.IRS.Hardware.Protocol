@@ -2,9 +2,8 @@
 {
     public class RebootRequestPackage:RequestPackageBase
     {
-        public RebootRequestPackage()
+        public RebootRequestPackage():base(APIs.Controls.Reboot)
         {
-            Api = APIs.Controls.Reboot;
         }
     }
 }

@@ -2,8 +2,10 @@
 {
     public class RequestPackageBase:ProtocolPackage
     {
-        public RequestPackageBase()
+        public RequestPackageBase(ushort api)
         {
+            Api = api;
+            ProtocolVersion = 0x01;
             IsRequestMessage = true;
         }
     }

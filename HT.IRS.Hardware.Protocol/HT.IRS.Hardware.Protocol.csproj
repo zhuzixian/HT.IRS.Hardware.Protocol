@@ -7,4 +7,12 @@
     <FileVersion>1.0.1.0</FileVersion>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Data\Requests\Tasks\Robots\PickPlace\PlanRequestData.cs~RF3efc2ff.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Text.Json" Version="6.0.0" />
+  </ItemGroup>
+
 </Project>

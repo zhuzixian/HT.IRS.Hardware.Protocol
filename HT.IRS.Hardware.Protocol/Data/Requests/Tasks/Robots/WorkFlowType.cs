@@ -1,6 +1,6 @@
 ﻿namespace HT.IRS.Hardware.Protocol.Data.Requests.Tasks.Robots
 {
-    public class WorkFlowTypeRequestData
+    public class WorkFlowType
     {
         public const int Navigate = 1;
         public const int PickPlace = 2;

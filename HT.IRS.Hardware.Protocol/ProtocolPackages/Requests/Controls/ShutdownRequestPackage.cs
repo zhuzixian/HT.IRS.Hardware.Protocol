@@ -2,9 +2,8 @@
 {
     public class ShutdownRequestPackage:RequestPackageBase
     {
-        public ShutdownRequestPackage()
+        public ShutdownRequestPackage():base(APIs.Controls.Shutdown)
         {
-            Api = APIs.Controls.Shutdown;
         }
     }
 }

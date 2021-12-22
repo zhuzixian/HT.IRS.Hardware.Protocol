@@ -2,9 +2,8 @@
 {
     public class EmergencyInfoRequestPackage:RequestPackageBase
     {
-        public EmergencyInfoRequestPackage()
+        public EmergencyInfoRequestPackage():base(APIs.Status.GetEmergencyInfos)
         {
-            Api = Protocol.APIs.Status.GetEmergencyInfos;
         }
     }
 }

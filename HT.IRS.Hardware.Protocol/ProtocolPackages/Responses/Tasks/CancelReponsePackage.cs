@@ -1,10 +1,17 @@
-﻿namespace HT.IRS.Hardware.Protocol.ProtocolPackages.Responses.Tasks
+﻿using HT.IRS.Hardware.Protocol.Data.Responses.Tasks;
+
+namespace HT.IRS.Hardware.Protocol.ProtocolPackages.Responses.Tasks
 {
-    internal class CancelResponsePackage:ResponsePackageBase
+    internal class CancelResponsePackage:ResponsePackageBase<CancelResponseData>
     {
-        public CancelResponsePackage(string data) : base(data)
+        public CancelResponsePackage(ushort sequenceNo, string data) 
+            : base(APIs.Tasks.Cancel, sequenceNo, data)
         {
-            Api = APIs.Tasks.Cancel;
+        }
+
+        public CancelResponsePackage(ushort sequenceNo, CancelResponseData data) 
+            : base(APIs.Tasks.Cancel, sequenceNo, data)
+        {
         }
     }
 }

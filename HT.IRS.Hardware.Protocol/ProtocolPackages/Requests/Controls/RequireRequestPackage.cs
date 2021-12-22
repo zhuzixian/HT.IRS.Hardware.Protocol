@@ -2,9 +2,8 @@
 {
     public class RequireRequestPackage:RequestPackageBase
     {
-        public RequireRequestPackage()
+        public RequireRequestPackage():base(APIs.Controls.Require)
         {
-            Api = APIs.Controls.Require;
         }
     }
 }

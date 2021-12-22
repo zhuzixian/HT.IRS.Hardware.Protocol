@@ -1,10 +1,17 @@
-﻿namespace HT.IRS.Hardware.Protocol.ProtocolPackages.Responses.Controls
+﻿using HT.IRS.Hardware.Protocol.Data.Responses.Controls;
+
+namespace HT.IRS.Hardware.Protocol.ProtocolPackages.Responses.Controls
 {
-    public class ShutdownResponsePackage:ResponsePackageBase
+    public class ShutdownResponsePackage:ResponsePackageBase<ShutdownResponseData>
     {
-        public ShutdownResponsePackage(string data):base(data)
+        public ShutdownResponsePackage(ushort sequenceNo, string data)
+            :base(APIs.Controls.Shutdown, sequenceNo, data)
         {
-            Api = APIs.Controls.Shutdown;
+        }
+
+        public ShutdownResponsePackage(ushort sequenceNo, ShutdownResponseData data) 
+            : base(APIs.Controls.Shutdown, sequenceNo, data)
+        {
         }
     }
 }

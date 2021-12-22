@@ -2,9 +2,8 @@
 {
     public class WorkflowInfoRequestPackage:RequestPackageBase
     {
-        public WorkflowInfoRequestPackage()
+        public WorkflowInfoRequestPackage():base(APIs.Status.GetWorkFlowInfos)
         {
-            Api = APIs.Status.GetWorkflowInfos;
         }
     }
 }

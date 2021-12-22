@@ -1,10 +1,18 @@
-﻿namespace HT.IRS.Hardware.Protocol.ProtocolPackages.Responses.Tasks
+﻿using HT.IRS.Hardware.Protocol.Data.Responses;
+
+namespace HT.IRS.Hardware.Protocol.ProtocolPackages.Responses.Tasks
 {
-    public class CompleteResponsePackage:ResponsePackageBase
+    public class CompleteResponsePackage<T>:ResponsePackageBase<T>
+        where T:ResponseDataBase
     {
-        public CompleteResponsePackage(string data) : base(data)
+        public CompleteResponsePackage(ushort sequenceNo, string data)
+            : base(APIs.Tasks.Complete, sequenceNo, data)
         {
-            Api = Protocol.APIs.Tasks.Complete;
+        }
+
+        public CompleteResponsePackage(ushort sequenceNo, T data) 
+            : base(APIs.Tasks.Complete, sequenceNo, data)
+        {
         }
     }
 }

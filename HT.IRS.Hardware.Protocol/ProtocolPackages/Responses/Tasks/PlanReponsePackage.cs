@@ -1,11 +1,15 @@
-﻿namespace HT.IRS.Hardware.Protocol.ProtocolPackages.Responses.Tasks
+﻿using HT.IRS.Hardware.Protocol.Data.Responses.Tasks;
+
+namespace HT.IRS.Hardware.Protocol.ProtocolPackages.Responses.Tasks
 {
-    public class PlanResponsePackage:ResponsePackageBase
+    public class PlanResponsePackage:ResponsePackageBase<PlanResponseData>
     {
-        public PlanResponsePackage(string data):base(data)
+        public PlanResponsePackage(ushort sequenceNo, string data):base(APIs.Tasks.Plan, sequenceNo, data) 
         {
-            Data = data;
-            Api = Protocol.APIs.Tasks.Plan;
+        }
+
+        public PlanResponsePackage(ushort sequenceNo, PlanResponseData data) : base(APIs.Tasks.Plan, sequenceNo, data)
+        {
         }
     }
 }

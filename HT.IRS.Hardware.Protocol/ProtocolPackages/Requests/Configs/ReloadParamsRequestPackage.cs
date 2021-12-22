@@ -2,9 +2,8 @@
 {
     public class ReloadParamsRequestPackage:RequestPackageBase
     {
-        public ReloadParamsRequestPackage()
+        public ReloadParamsRequestPackage(ushort api):base(APIs.Configs.ReloadParams)
         {
-            Api = APIs.Configs.ReloadParams;
         }
     }
 }

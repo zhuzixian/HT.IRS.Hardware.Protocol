@@ -2,9 +2,8 @@
 {
     public class RemoveRequestPackage:RequestPackageBase
     {
-        public RemoveRequestPackage()
+        public RemoveRequestPackage():base(APIs.Configs.Remove)
         {
-            Api = APIs.Configs.Remove;
         }
     }
 }

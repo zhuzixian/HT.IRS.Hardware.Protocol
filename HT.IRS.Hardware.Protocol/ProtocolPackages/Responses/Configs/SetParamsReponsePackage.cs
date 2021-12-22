@@ -1,10 +1,12 @@
-﻿namespace HT.IRS.Hardware.Protocol.ProtocolPackages.Responses.Configs
+﻿using HT.IRS.Hardware.Protocol.Data.Responses.Configs;
+
+namespace HT.IRS.Hardware.Protocol.ProtocolPackages.Responses.Configs
 {
-    public class SetParamsResponsePackage:ResponsePackageBase
+    public class SetParamsResponsePackage:ResponsePackageBase<SetParamsResponseData>
     {
-        public SetParamsResponsePackage(string data):base(data)
+        public SetParamsResponsePackage(ushort sequenceNo, string data)
+            :base(sequenceNo, APIs.Configs.SetParams, data)
         {
-            Api = APIs.Configs.SetParams;
         }
     }
 }

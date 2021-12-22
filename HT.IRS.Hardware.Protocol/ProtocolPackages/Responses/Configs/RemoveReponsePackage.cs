@@ -1,10 +1,17 @@
-﻿namespace HT.IRS.Hardware.Protocol.ProtocolPackages.Responses.Configs
+﻿using HT.IRS.Hardware.Protocol.Data.Responses.Configs;
+
+namespace HT.IRS.Hardware.Protocol.ProtocolPackages.Responses.Configs
 {
-    public class RemoveResponsePackage:ResponsePackageBase
+    public class RemoveResponsePackage: ResponsePackageBase<RemoveResponseData>
     {
-        public RemoveResponsePackage(string data):base(data)
+        public RemoveResponsePackage(ushort sequenceNo, string data)
+            : base(sequenceNo, APIs.Configs.Remove, data)
         {
-            Api = APIs.Configs.Remove;
+        }
+
+        public RemoveResponsePackage(ushort sequenceNo, RemoveResponseData data) 
+            : base(sequenceNo, APIs.Configs.Remove, data)
+        {
         }
     }
 }

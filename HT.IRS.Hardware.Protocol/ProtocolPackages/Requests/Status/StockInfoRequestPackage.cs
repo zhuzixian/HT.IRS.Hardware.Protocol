@@ -2,9 +2,8 @@
 {
     public class StockInfoRequestPackage:RequestPackageBase
     {
-        public StockInfoRequestPackage()
+        public StockInfoRequestPackage():base(APIs.Status.GetStockInfos)
         {
-            Api = APIs.Status.GetStockInfos;
         }
     }
 }

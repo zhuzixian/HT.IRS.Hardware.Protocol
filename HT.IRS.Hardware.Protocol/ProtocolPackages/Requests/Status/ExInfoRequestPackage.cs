@@ -2,9 +2,8 @@
 {
     public class ExInfoRequestPackage:RequestPackageBase
     {
-        public ExInfoRequestPackage()
+        public ExInfoRequestPackage():base(APIs.Status.GetExInfos)
         {
-            Api = APIs.Status.GetExInfos;
         }
     }
 }

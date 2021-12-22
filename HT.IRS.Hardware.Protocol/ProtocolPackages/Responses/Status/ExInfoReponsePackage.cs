@@ -1,10 +1,17 @@
-﻿namespace HT.IRS.Hardware.Protocol.ProtocolPackages.Responses.Status
+﻿using HT.IRS.Hardware.Protocol.Data.Responses.Status;
+
+namespace HT.IRS.Hardware.Protocol.ProtocolPackages.Responses.Status
 {
-    public class ExInfoResponsePackage: ResponsePackageBase
+    public class ExInfoResponsePackage: ResponsePackageBase<ExInfoResponseData>
     {
-        public ExInfoResponsePackage(string data) : base(data)
+        public ExInfoResponsePackage(ushort sequenceNo, string data) 
+            : base(APIs.Status.GetExInfos, sequenceNo, data)
         {
-            Api = APIs.Status.GetExInfos;
+        }
+
+        public ExInfoResponsePackage(ushort sequenceNo, ExInfoResponseData data) 
+            : base(APIs.Status.GetExInfos, sequenceNo, data)
+        {
         }
     }
 }

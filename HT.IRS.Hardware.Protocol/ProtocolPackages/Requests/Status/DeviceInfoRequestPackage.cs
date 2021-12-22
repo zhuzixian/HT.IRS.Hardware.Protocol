@@ -2,9 +2,8 @@
 {
     public class DeviceInfoRequestPackage:RequestPackageBase
     {
-        public DeviceInfoRequestPackage()
+        public DeviceInfoRequestPackage():base(APIs.Status.GetDeviceInfos)
         {
-            Api = Protocol.APIs.Status.GetDeviceInfos;
         }
     }
 }

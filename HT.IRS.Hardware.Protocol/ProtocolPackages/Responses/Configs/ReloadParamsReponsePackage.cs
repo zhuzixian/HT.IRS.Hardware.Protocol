@@ -1,10 +1,17 @@
-﻿namespace HT.IRS.Hardware.Protocol.ProtocolPackages.Responses.Configs
+﻿using HT.IRS.Hardware.Protocol.Data.Responses.Configs;
+
+namespace HT.IRS.Hardware.Protocol.ProtocolPackages.Responses.Configs
 {
-    public class ReloadParamsResponsePackage:ResponsePackageBase
+    public class ReloadParamsResponsePackage:ResponsePackageBase<ReloadParamsResponseData>
     {
-        public ReloadParamsResponsePackage(string data) : base(data)
+        public ReloadParamsResponsePackage(ushort sequenceNo, string data) 
+            : base(APIs.Configs.ReloadParams, sequenceNo, data) 
         {
-            Api = APIs.Configs.ReloadParams;
+        }
+
+        public ReloadParamsResponsePackage(ushort sequenceNo, ReloadParamsResponseData data) 
+            : base(APIs.Configs.ReloadParams, sequenceNo, data) 
+        {
         }
     }
 }

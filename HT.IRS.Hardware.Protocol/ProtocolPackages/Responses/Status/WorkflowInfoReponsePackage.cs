@@ -1,10 +1,17 @@
-﻿namespace HT.IRS.Hardware.Protocol.ProtocolPackages.Responses.Status
+﻿using HT.IRS.Hardware.Protocol.Data.Responses.Status;
+
+namespace HT.IRS.Hardware.Protocol.ProtocolPackages.Responses.Status
 { 
-    public class WorkflowInfoResponsePackage:ResponsePackageBase
+    public class WorkflowInfoResponsePackage:ResponsePackageBase<WorkFlowInfoResponseData>
     {
-        public WorkflowInfoResponsePackage(string data) : base(data)
+        public WorkflowInfoResponsePackage(ushort sequenceNo, string data) 
+            : base(APIs.Status.GetWorkFlowInfos, sequenceNo, data)
         {
-            Api = APIs.Status.GetDeviceInfos;
+        }
+
+        public WorkflowInfoResponsePackage(ushort sequenceNo, WorkFlowInfoResponseData data) 
+            : base(APIs.Status.GetWorkFlowInfos, sequenceNo, data)
+        {
         }
     }
 }

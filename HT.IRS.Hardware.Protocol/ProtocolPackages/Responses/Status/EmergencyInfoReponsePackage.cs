@@ -1,10 +1,17 @@
-﻿namespace HT.IRS.Hardware.Protocol.ProtocolPackages.Responses.Status
+﻿using HT.IRS.Hardware.Protocol.Data.Responses.Status;
+
+namespace HT.IRS.Hardware.Protocol.ProtocolPackages.Responses.Status
 {
-    public class EmergencyInfoResponsePackage: ResponsePackageBase
+    public class EmergencyInfoResponsePackage: ResponsePackageBase<EmergencyInfoResponseData>
     {
-        public EmergencyInfoResponsePackage(string data):base(data)
+        public EmergencyInfoResponsePackage(ushort sequenceNo, string data)
+            :base(APIs.Status.GetEmergencyInfos, sequenceNo, data)
         {
-            Api = APIs.Status.GetEmergencyInfos;
+        }
+
+        public EmergencyInfoResponsePackage(ushort sequenceNo, EmergencyInfoResponseData data) 
+            : base(APIs.Status.GetEmergencyInfos, sequenceNo, data)
+        {
         }
     }
 }

@@ -1,10 +1,17 @@
-﻿namespace HT.IRS.Hardware.Protocol.ProtocolPackages.Responses.Status
+﻿using HT.IRS.Hardware.Protocol.Data.Responses.Status;
+
+namespace HT.IRS.Hardware.Protocol.ProtocolPackages.Responses.Status
 {
-    public class DeviceInfoResponsePackage: ResponsePackageBase
+    public class DeviceInfoResponsePackage: ResponsePackageBase<DeviceInfoResponseData>
     {
-        public DeviceInfoResponsePackage(string data):base(data)
+        public DeviceInfoResponsePackage(ushort sequenceNo, string data)
+            :base(APIs.Status.GetDeviceInfos, sequenceNo, data) 
         {
-            Api = Protocol.APIs.Status.GetDeviceInfos;
+        }
+
+        public DeviceInfoResponsePackage(ushort sequenceNo, DeviceInfoResponseData data) 
+            : base(APIs.Status.GetDeviceInfos, sequenceNo, data)
+        {
         }
     }
 }

@@ -1,11 +1,17 @@
-﻿namespace HT.IRS.Hardware.Protocol.ProtocolPackages.Requests.Configs
+﻿using HT.IRS.Hardware.Protocol.Data.Requests.Configs;
+
+namespace HT.IRS.Hardware.Protocol.ProtocolPackages.Requests.Configs
 {
     public class SetDefaultWorkFlowRequestPackage:RequestPackageBase
     {
-        public SetDefaultWorkFlowRequestPackage(string data)
+        public SetDefaultWorkFlowRequestPackage(string data) : base(APIs.Configs.SetDefaultWorkflow)
         {
             Data = data;
-            Api = APIs.Configs.SetDefaultWorkflow;
+        }
+
+        public SetDefaultWorkFlowRequestPackage(SetDefaultWorkflowRequestData data):base(APIs.Configs.SetDefaultWorkflow)
+        {
+            Data = Serialize(data);
         }
     }
 }

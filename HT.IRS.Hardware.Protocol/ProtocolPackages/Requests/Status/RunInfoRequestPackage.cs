@@ -2,9 +2,8 @@
 {
     public class RunInfoRequestPackage:RequestPackageBase
     {
-        public RunInfoRequestPackage()
+        public RunInfoRequestPackage(): base(APIs.Status.GetRunInfos)
         {
-            Api = APIs.Status.GetRunInfos;
         }
     }
 }

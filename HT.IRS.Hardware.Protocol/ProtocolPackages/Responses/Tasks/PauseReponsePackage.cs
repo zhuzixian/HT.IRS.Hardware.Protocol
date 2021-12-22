@@ -1,10 +1,16 @@
-﻿namespace HT.IRS.Hardware.Protocol.ProtocolPackages.Responses.Tasks
+﻿using HT.IRS.Hardware.Protocol.Data.Responses.Tasks;
+
+namespace HT.IRS.Hardware.Protocol.ProtocolPackages.Responses.Tasks
 {
-    public class PauseResponsePackage:ResponsePackageBase
+    public class PauseResponsePackage:ResponsePackageBase<PauseResponseData>
     {
-        public PauseResponsePackage(string data) : base(data)
+        public PauseResponsePackage(ushort sequenceNo, string data) 
+            : base(APIs.Tasks.Pause, sequenceNo, data)
         {
-            Api = APIs.Tasks.Pause;
+        }
+
+        public PauseResponsePackage(ushort sequenceNo, PauseResponseData data) : base(APIs.Tasks.Pause, sequenceNo, data)
+        {
         }
     }
 }

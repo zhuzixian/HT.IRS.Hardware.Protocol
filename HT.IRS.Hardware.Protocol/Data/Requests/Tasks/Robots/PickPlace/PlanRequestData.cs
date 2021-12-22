@@ -9,7 +9,7 @@ namespace HT.IRS.Hardware.Protocol.Data.Requests.Tasks.Robots.PickPlace
             Param = new Param();
         }
 
-        public override int Type => WorkFlowTypeRequestData.PickPlace;
+        public override int Type => WorkFlowType.PickPlace;
 
         public Param Param { get; set; }
     }

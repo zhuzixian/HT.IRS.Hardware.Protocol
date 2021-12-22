@@ -2,9 +2,8 @@
 {
     public class DownloadRequestPackage:RequestPackageBase
     {
-        public DownloadRequestPackage()
+        public DownloadRequestPackage():base(APIs.Configs.Download)
         {
-            Api = APIs.Configs.Download;
         }
     }
 }

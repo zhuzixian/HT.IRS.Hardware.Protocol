@@ -1,10 +1,17 @@
-﻿namespace HT.IRS.Hardware.Protocol.ProtocolPackages.Responses.Status
+﻿using HT.IRS.Hardware.Protocol.Data.Responses.Status;
+
+namespace HT.IRS.Hardware.Protocol.ProtocolPackages.Responses.Status
 {
-    public class ParamInfoResponsePackage: ResponsePackageBase
+    public class ParamInfoResponsePackage: ResponsePackageBase<ParamInfoResponseData>
     {
-        public ParamInfoResponsePackage(string data):base(data)
+        public ParamInfoResponsePackage(ushort sequenceNo, string data)
+            :base(APIs.Status.GetParamInfos, sequenceNo, data)
         {
-            Api = APIs.Status.GetParamInfos;
+        }
+        
+        public ParamInfoResponsePackage(ushort sequenceNo, ParamInfoResponseData data)
+            :base(APIs.Status.GetParamInfos, sequenceNo, data)
+        {
         }
     }
 }

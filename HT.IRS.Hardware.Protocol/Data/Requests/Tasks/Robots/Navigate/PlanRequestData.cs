@@ -7,7 +7,7 @@
             Param = new Param();
         }
 
-        public override int Type => WorkFlowTypeRequestData.Navigate;
+        public override int Type => WorkFlowType.Navigate;
 
         public Param Param { get; set; }
     }
