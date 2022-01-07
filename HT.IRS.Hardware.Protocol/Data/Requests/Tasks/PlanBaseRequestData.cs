@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace HT.IRS.Hardware.Protocol.Data.Requests.Tasks
+﻿namespace HT.IRS.Hardware.Protocol.Data.Requests.Tasks
 {
     public class PlanBaseRequestData:TaskRequestBaseRequestData
     {

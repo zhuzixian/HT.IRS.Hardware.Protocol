@@ -2,8 +2,8 @@
 
 namespace HT.IRS.Hardware.Protocol.Data.Responses.Tasks.Pipettes
 {
-    public class CompleteResponseData
+    public class CompleteResponseData:Tasks.CompleteResponseData
     {
-        public IEnumerable<PipettingProcedure> CompletedProcedures { get; set; }
+        public IEnumerable<PipettingProcedureCompleteData> CompletedProcedures { get; set; }
     }
 }

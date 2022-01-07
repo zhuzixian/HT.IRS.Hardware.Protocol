@@ -146,7 +146,7 @@ namespace HT.IRS.Hardware.Protocol.ProtocolPackages
 
             var dataBytes = string.IsNullOrEmpty(data)
                 ? null
-                : System.Text.Encoding.UTF8.GetBytes(data);
+                : Encoding.UTF8.GetBytes(data);
 
             // 正文长度
             var dataLenBytes = dataBytes == null

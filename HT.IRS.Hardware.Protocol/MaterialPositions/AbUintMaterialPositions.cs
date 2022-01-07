@@ -6,10 +6,10 @@ namespace HT.IRS.Hardware.Protocol.MaterialPositions
     {
         static AbUintMaterialPositions()
         {
-            MultiTubeTray1 = new MaterialPosition("8联条管", WorkUnit.AbUnit,
+            MultiTubeTray = new MaterialPosition("8联条管", WorkUnit.AbUnit,
                 Material.MultiTubeTray, Position.P001);
 
-            AbReagentTray1 = new MaterialPosition("AB试剂", WorkUnit.AbUnit, 
+            AbReagentTray = new MaterialPosition("AB试剂", WorkUnit.AbUnit, 
                 Material.AbReagentTray, Position.P001);
 
             DiscardTipsBox = new MaterialPosition("废枪头盒", WorkUnit.AbUnit,
@@ -19,26 +19,37 @@ namespace HT.IRS.Hardware.Protocol.MaterialPositions
             TipsBoxB = new MaterialPosition("枪头盒B", WorkUnit.AbUnit,
                 Material.TipsBox, Position.P003);
 
+            CloseMultiTubeCap = new MaterialPosition("8联联条管托架盖#关", WorkUnit.AbUnit,
+                Material.MultiTubeCap, Position.P001);
+            OpenMultiTubeCap = new MaterialPosition("8联条管托架盖#开", WorkUnit.AbUnit,
+                Material.MultiTubeCap, Position.P002);
+
             MaterialPositions = new[]
             {
-                MultiTubeTray1,
+                MultiTubeTray,
 
-                AbReagentTray1,
+                AbReagentTray,
 
                 TipsBoxA,
                 TipsBoxB,
                 DiscardTipsBox,
+
+                CloseMultiTubeCap,
+                OpenMultiTubeCap
             };
         }
 
         public static IEnumerable<MaterialPosition> MaterialPositions { get; }
 
-        public static MaterialPosition MultiTubeTray1 { get; }
+        public static MaterialPosition MultiTubeTray { get; }
 
         public static MaterialPosition DiscardTipsBox { get; }
         public static MaterialPosition TipsBoxA { get; }
         public static MaterialPosition TipsBoxB { get; }
 
-        public static MaterialPosition AbReagentTray1 { get; }
+        public static MaterialPosition AbReagentTray { get; }
+
+        public static MaterialPosition CloseMultiTubeCap { get; }
+        public static MaterialPosition OpenMultiTubeCap { get; }
     }
 }

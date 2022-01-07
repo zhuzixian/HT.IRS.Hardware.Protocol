@@ -17,5 +17,6 @@ namespace HT.IRS.Hardware.Protocol.Data.Responses.Status.Robots
         public string Type { get; set; }
         public string Position { get; set; }
         public int Count { get; set; }
+        public string Code { get; set; }
     }
 }

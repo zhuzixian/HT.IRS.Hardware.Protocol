@@ -6,7 +6,7 @@
         public const string Robot = "Robots";
         public const string CUnit = "CUnit";
         public const string DUnit = "DUnit";
-        public const string Extraction = "Extraction";
+        public const string NucleicAcidExtractor = "NucleicAcidExtractor";
         public const string SealingMachine = "SealingMachine";
         public const string DiscardWellPlateArea = "DiscardWellPlateArea";
         public const string DiscardTipsBoxArea = "DiscardTipsBoxArea";

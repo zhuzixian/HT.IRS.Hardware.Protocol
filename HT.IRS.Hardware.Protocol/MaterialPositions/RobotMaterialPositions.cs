@@ -22,6 +22,10 @@ namespace HT.IRS.Hardware.Protocol.MaterialPositions
                 Material.WellPlate, Position.P002);
             WellPlate3 = new MaterialPosition("96孔板#3", WorkUnit.Robots,
                 Material.WellPlate, Position.P003);
+            WellPlate4 = new MaterialPosition("96孔板#4", WorkUnit.Robots,
+                Material.WellPlate, Position.P004);
+            WellPlate5 = new MaterialPosition("96孔板#5", WorkUnit.Robots,
+                Material.WellPlate, Position.P005);
 
             SampleTray1 = new MaterialPosition("样本#1", WorkUnit.Robots,
                 Material.SampleTray, Position.P001);
@@ -34,10 +38,6 @@ namespace HT.IRS.Hardware.Protocol.MaterialPositions
                 Material.TipsBox, Position.P002);
             TipsBox3 = new MaterialPosition("枪头盒#3", WorkUnit.Robots,
                 Material.TipsBox, Position.P003);
-            TipsBox4 = new MaterialPosition("枪头盒#4", WorkUnit.Robots,
-                Material.TipsBox, Position.P004);
-            TipsBox5 = new MaterialPosition("枪头盒#5", WorkUnit.Robots,
-                Material.TipsBox, Position.P005);
 
             MaterialPositions = new[]
             {
@@ -50,6 +50,8 @@ namespace HT.IRS.Hardware.Protocol.MaterialPositions
                 WellPlate1,
                 WellPlate2,
                 WellPlate3,
+                WellPlate4,
+                WellPlate5,
 
                 SampleTray1,
                 SampleTray2,
@@ -57,8 +59,6 @@ namespace HT.IRS.Hardware.Protocol.MaterialPositions
                 TipsBox1,
                 TipsBox2,
                 TipsBox3,
-                TipsBox4,
-                TipsBox5
             };
         }
 
@@ -71,6 +71,8 @@ namespace HT.IRS.Hardware.Protocol.MaterialPositions
         public static MaterialPosition WellPlate1 { get; }
         public static MaterialPosition WellPlate2 { get; }
         public static MaterialPosition WellPlate3 { get; }
+        public static MaterialPosition WellPlate4 { get; }
+        public static MaterialPosition WellPlate5 { get; }
         public static MaterialPosition SampleTray1 { get; }
         public static MaterialPosition SampleTray2 { get; }
         public static MaterialPosition TipsBox1 { get; }
