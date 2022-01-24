@@ -9,5 +9,9 @@ namespace HT.IRS.Hardware.Protocol.ProtocolPackages.Responses.Tasks
         {
             Api = APIs.Tasks.Resume;
         }
+
+        public ResumeResponsePackage(ushort sequenceNo, ResumeResponseData data) : base(APIs.Tasks.Resume, sequenceNo, data)
+        {
+        }
     }
 }

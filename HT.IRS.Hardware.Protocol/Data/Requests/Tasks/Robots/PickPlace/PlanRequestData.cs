@@ -21,8 +21,8 @@ namespace HT.IRS.Hardware.Protocol.Data.Requests.Tasks.Robots.PickPlace
 
     public class PickPlaceProcedure
     {
-        public MaterialPositions.MaterialPosition Source { get; set; }
-        public MaterialPositions.MaterialPosition Target { get; set; }
+        public MaterialSeat Source { get; set; }
+        public MaterialSeat Target { get; set; }
     }
 
 

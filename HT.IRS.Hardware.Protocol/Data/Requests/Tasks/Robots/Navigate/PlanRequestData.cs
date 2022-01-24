@@ -14,6 +14,6 @@
 
     public class Param
     {
-        public string Target { get; set; }
+        public int Target { get; set; }
     }
 }

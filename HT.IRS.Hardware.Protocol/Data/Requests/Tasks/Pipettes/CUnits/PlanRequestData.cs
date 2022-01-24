@@ -16,6 +16,8 @@ namespace HT.IRS.Hardware.Protocol.Data.Requests.Tasks.Pipettes.CUnits
     {
         public bool IsReplaceTipsBox { get; set; }
 
+        public int SampleTray { get; set; }
+
         public IEnumerable<SpecifyProcedure> SpecifySpecifyProcedures { get; set; }
     }
 
